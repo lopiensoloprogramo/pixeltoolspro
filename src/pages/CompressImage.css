@@ -1,0 +1,90 @@
+.compress-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.toolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.toolbar-button:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+  border-color: var(--border);
+}
+
+.download-button {
+  background: var(--primary);
+  color: white;
+}
+
+.download-button:hover {
+  background: var(--primary-hover);
+  color: white;
+}
+
+.new-image-button {
+  margin-left: 4px;
+  border-left: 1px solid var(--border);
+  border-radius: 0;
+  padding-left: 20px;
+}
+.editor-workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 0px;
+ margin-top: 0;
+}
+
+
+.editor-workspace img {
+  width: 530px;
+  height: 330px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.editor-workspace > div {
+  text-align: center;
+  margin-top: 0;
+}
+
+
+.compress-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.correcto{
+
+  color: green;
+}
+
+@media (max-width: 700px) {
+  .editor-workspace img {
+    width: 250px;
+    height: 250px;
+  }
+}

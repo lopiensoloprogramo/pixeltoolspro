@@ -1,0 +1,52 @@
+.hero {
+  min-height: auto;
+
+  padding: 5px 20px 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  background: #eef2ff;
+  color: #4f46e5;
+
+  margin-bottom: 20px;
+}
+
+
+.hero h1 {
+  max-width: 850px;
+
+  font-size: clamp(2.5rem, 5vw, 2rem);
+  line-height: 1.05;
+
+  font-weight: 800;
+  letter-spacing: -0.04em;
+
+  margin: 0 0 25px;
+}
+
+
+.hero p {
+  max-width: 650px;
+
+  font-size: 1.15rem;
+  line-height: 1.7;
+
+  color: #64748b;
+
+  margin: 0;
+}

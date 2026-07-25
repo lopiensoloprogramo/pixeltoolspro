@@ -1,0 +1,57 @@
+.upload-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    min-height: 280px;
+
+    background:var(--surface);
+
+    border:2px dashed var(--border);
+
+    border-radius:var(--radius);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.upload-area:hover{
+
+    border-color:var(--primary);
+
+    background:var(--surface-hover);
+
+}
+
+.icon{
+
+    font-size:72px;
+
+}
+
+.upload-area h2{
+
+    font-size:28px;
+
+}
+
+.upload-area p{
+
+    color:var(--text-secondary);
+
+}
+
+.upload-area span{
+
+    color:var(--text-muted);
+
+}

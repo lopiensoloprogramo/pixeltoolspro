@@ -1,0 +1,240 @@
+.editor-toolbar {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 10px;
+
+  margin-bottom: 20px;
+
+  margin-top: 0;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+
+}
+
+
+.toolbar-button {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 10px 16px;
+
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  border: 1px solid transparent;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  transition: 0.2s;
+
+}
+
+
+.toolbar-button:hover:not(:disabled) {
+
+  color: var(--text);
+
+  background: var(--surface-hover);
+
+  border-color: var(--border);
+
+}
+
+
+.toolbar-button:disabled {
+
+  opacity: 0.35;
+
+  cursor: not-allowed;
+
+}
+
+
+/* ========================================
+   DESCARGAR
+======================================== */
+
+.download-button {
+
+  background: var(--primary);
+
+  color: white;
+
+}
+
+
+.download-button:hover:not(:disabled) {
+
+  background: var(--primary-hover);
+
+  color: white;
+
+  transform: translateY(-1px);
+
+}
+
+
+/* ========================================
+   NUEVA IMAGEN
+======================================== */
+
+.new-image-button {
+
+  margin-left: 4px;
+
+  border-left: 1px solid var(--border);
+
+  border-radius: 0;
+
+  padding-left: 20px;
+
+}
+
+
+.new-image-button:hover:not(:disabled) {
+
+  background: var(--surface-hover);
+
+  color: var(--text);
+
+}
+
+
+/* ========================================
+   ZOOM
+======================================== */
+.zoom-controls {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 4px 6px;
+
+  background: white;
+
+
+}
+
+
+.zoom-button {
+
+  width: 32px;
+
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  border: none;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+}
+
+
+.zoom-button:hover:not(:disabled) {
+
+  background: var(--surface-hover);
+
+  color: var(--text);
+
+}
+
+
+.zoom-button:disabled {
+
+  opacity: .3;
+
+  cursor: not-allowed;
+
+}
+
+
+.zoom-value {
+
+  min-width: 48px;
+
+  text-align: center;
+
+  color: var(--text);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 700px) {
+
+  .editor-toolbar {
+
+    flex-wrap: wrap;
+
+  }
+
+
+  .toolbar-button span {
+
+    display: none;
+
+  }
+
+
+  .toolbar-button {
+
+    width: 44px;
+
+    height: 44px;
+
+    padding: 0;
+
+  }
+
+}
