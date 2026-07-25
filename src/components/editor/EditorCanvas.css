@@ -1,22 +1,21 @@
 .editor-canvas-container {
-
   position: relative;
 
   width: 100%;
+  max-width: 100%;
 
-  min-height: 500px;
-
-  max-height: 650px;
+  height: 600px;
+  max-height: 70vh;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
-  overflow: auto;
+  overflow: hidden;
 
-  padding: 40px;
+  padding: 30px;
+
+  box-sizing: border-box;
 
   background:
     linear-gradient(
@@ -52,21 +51,19 @@
     -12px 0;
 
   background-color: #1E293B;
-
 }
 
 
 .editor-canvas {
-
   display: block;
 
-  max-width: none;
-
-  max-height: none;
+  max-width: 100%;
+  max-height: 100%;
 
   width: auto;
-
   height: auto;
+
+  object-fit: contain;
 
   cursor: crosshair;
 
@@ -80,5 +77,27 @@
   box-shadow:
     0 10px 40px
     rgba(0, 0, 0, .35);
+}
+
+
+/* ========================================
+   MÓVIL
+======================================== */
+
+@media (max-width: 700px) {
+
+  .editor-canvas-container {
+    height: 450px;
+
+    max-height: 65vh;
+
+    padding: 15px;
+  }
+
+
+  .editor-canvas {
+    max-width: 100%;
+    max-height: 100%;
+  }
 
 }
