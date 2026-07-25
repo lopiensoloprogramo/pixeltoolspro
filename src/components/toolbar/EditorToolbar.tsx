@@ -45,29 +45,35 @@ export default function EditorToolbar({
       <div className="toolbar-group">
 
         <button
-          type="button"
-          className="toolbar-button"
-          onClick={onUndo}
-          title="Deshacer"
+        type="button"
+        className="toolbar-button history-button"
+        onClick={onUndo}
+        title="Deshacer"
         >
-          ↶
-          <span>
+        <span className="history-icon">
+            ↶
+        </span>
+
+        <span>
             Deshacer
-          </span>
+        </span>
         </button>
 
 
         <button
-          type="button"
-          className="toolbar-button"
-          onClick={onRedo}
-          title="Rehacer"
+        type="button"
+        className="toolbar-button history-button"
+        onClick={onRedo}
+        title="Rehacer"
         >
-          ↷
-          <span>
+        <span className="history-icon">
+            ↷
+        </span>
+
+        <span>
             Rehacer
-          </span>
-        </button>
+        </span>
+</button>
 
       </div>
 
