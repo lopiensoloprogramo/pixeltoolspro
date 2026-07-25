@@ -1,27 +1,24 @@
 import Navbar from "./Navbar";
+import Footer from "./Footer";
+
 import "./Layout.css";
-interface Props{
 
-    children:React.ReactNode;
-
+interface Props {
+  children: React.ReactNode;
 }
 
-export default function Layout({children}:Props){
+export default function Layout({ children }: Props) {
+  return (
+    <>
 
-    return(
+      <Navbar />
 
-        <>
+      <main className="container">
+        {children}
+      </main>
 
-            <Navbar/>
+      <Footer />
 
-            <main className="container">
-
-                {children}
-
-            </main>
-
-        </>
-
-    )
-
+    </>
+  );
 }
