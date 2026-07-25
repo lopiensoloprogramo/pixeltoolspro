@@ -179,8 +179,15 @@
 
 @media (
   max-width: 700px
-) {
+) 
+{
 
+    .editor-workspace img {
+    width: 100%;
+    max-width: 350px;
+    max-height: 350px;
+    object-fit: contain;
+  }
   .editor-toolbar {
     justify-content: stretch;
 
