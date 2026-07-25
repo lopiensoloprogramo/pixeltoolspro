@@ -227,12 +227,17 @@
   }
 
 
-  .toolbar-button span {
-
+ .toolbar-button span:not(.history-icon) {
     display: none;
-
   }
 
+  .history-icon {
+    display: inline-block;
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1;
+  }
 
   .toolbar-button {
 
