@@ -1,12 +1,12 @@
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import Seo  from "../components/SEO/Seo";
+import SeoComponent  from "../components/SEO/SeoComponent";
 export default function Cookies() {
 
 
 return ( 
 <Layout>
-    <Seo
+    <SeoComponent
     title="Política de Cookies | PixelTools Pro"
     description="Conoce cómo PixelTools Pro utiliza cookies y tecnologías similares para mejorar la experiencia de navegación y analizar el uso de nuestro sitio."
     />

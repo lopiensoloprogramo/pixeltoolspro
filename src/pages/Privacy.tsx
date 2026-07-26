@@ -1,13 +1,13 @@
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import Seo from "../components/SEO/Seo";
+import SeoComponent from "../components/SEO/SeoComponent";
 export default function Privacy() {
 
 
 
   return (
     <Layout>
-        <Seo
+        <SeoComponent
             title="Política de Privacidad | PixelTools Pro"
             description="Consulta la Política de Privacidad de PixelTools Pro y conoce cómo se recopila, utiliza y protege la información de los visitantes y usuarios del sitio."
         />

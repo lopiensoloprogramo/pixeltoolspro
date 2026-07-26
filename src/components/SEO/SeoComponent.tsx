@@ -5,7 +5,7 @@ interface SEOProps {
   description: string;
 }
 
-export default function Seo({
+export default function SeoComponent({
   title,
   description,
 }: SEOProps) {

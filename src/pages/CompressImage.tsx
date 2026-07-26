@@ -8,7 +8,7 @@ import ToolInfo from "../components/toolinfo/ToolInfo";
 import { compressImage } from "../services/imageCompression";
 
 import "./CompressImage.css";
-import Seo from '../components/SEO/Seo'
+import SeoComponent from '../components/SEO/SeoComponent'
 
 export default function CompressImage() {
 
@@ -203,7 +203,7 @@ export default function CompressImage() {
   return (
 
     <Layout>
-    <Seo
+    <SeoComponent
         title="Comprimir imágenes online gratis | PixelTools Pro"
         description="Comprime imágenes online gratis y reduce su tamaño manteniendo una buena calidad. Optimiza tus imágenes fácilmente desde tu navegador con PixelTools Pro."
     />

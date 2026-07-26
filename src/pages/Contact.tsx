@@ -1,14 +1,14 @@
 
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import Seo from '../components/SEO/Seo'
+import SeoComponent from '../components/SEO/SeoComponent'
 
 export default function Contact() {
 
 
   return (
     <Layout>
-        <Seo
+        <SeoComponent
         title="Contacto | PixelTools Pro"
         description="Ponte en contacto con PixelTools Pro para realizar consultas, informar problemas o enviar sugerencias sobre nuestras herramientas online."
         />
