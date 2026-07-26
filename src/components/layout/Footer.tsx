@@ -23,7 +23,7 @@ export default function Footer() {
 
           <h4>Herramientas</h4>
 
-          <Link to="/">
+          <Link to="/eliminar-fondo">
             Eliminar fondo
           </Link>
 

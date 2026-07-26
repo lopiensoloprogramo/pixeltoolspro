@@ -50,10 +50,17 @@ export default function Navbar() {
         Inicio
         </Link>
 
-         <Link to="/eliminar-fondo"  className={location.pathname === "/" ? "active" : ""}>
+        <Link
+        to="/eliminar-fondo"
+        className={
+            location.pathname === "/" ||
+            location.pathname === "/eliminar-fondo"
+            ? "active"
+            : ""
+        }
+        >
         Eliminar fondo
         </Link>
-
         <Link to="/comprimir-imagen" className={ location.pathname === "/comprimir-imagen"
             ? "active"
             : ""}>
