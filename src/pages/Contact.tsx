@@ -1,8 +1,16 @@
 
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
+import { useEffect } from "react";
 
 export default function Contact() {
+
+    useEffect(() => {
+
+  document.title =
+    "Contactanos";
+
+}, []);
   return (
     <Layout>
 

@@ -1,8 +1,17 @@
 
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
+import { useEffect } from "react";
 
 export default function Terms() {
+
+        useEffect(() => {
+    
+      document.title =
+        "Terminos y Condiciones";
+    
+    }, []);
+
   return (
     <Layout>
 
