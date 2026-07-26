@@ -50,7 +50,7 @@ export default function Navbar() {
         Inicio
         </Link>
 
-         <Link to="/"  className={location.pathname === "/" ? "active" : ""}>
+         <Link to="/eliminar-fondo"  className={location.pathname === "/" ? "active" : ""}>
         Eliminar fondo
         </Link>
 
