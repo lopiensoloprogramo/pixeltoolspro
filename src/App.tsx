@@ -8,6 +8,8 @@ import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import Cookies from "./pages/Cookies";
 
+
+
 function App() {
 
   return (
@@ -21,6 +23,10 @@ function App() {
           element={<RemoveBackground />}
         />
 
+       <Route
+          path="/eliminar-fondo"
+          element={<RemoveBackground />}
+        />
 
         <Route
           path="/comprimir-imagen"
