@@ -1,18 +1,16 @@
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import { useEffect } from "react";
+import SEO from "../components/SEO/Seo";
 export default function Privacy() {
 
-        useEffect(() => {
-    
-      document.title =
-        "Políticas de Privacidad";
-    
-    }, []);
+
 
   return (
     <Layout>
-
+        <SEO
+            title="Política de Privacidad | PixelTools Pro"
+            description="Consulta la Política de Privacidad de PixelTools Pro y conoce cómo se recopila, utiliza y protege la información de los visitantes y usuarios del sitio."
+        />
       <LegalPage title="Política de Privacidad">
 
         <p>

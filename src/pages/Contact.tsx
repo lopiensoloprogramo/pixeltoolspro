@@ -1,18 +1,17 @@
 
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import { useEffect } from "react";
+import SEO from '../components/SEO/Seo'
 
 export default function Contact() {
 
-    useEffect(() => {
 
-  document.title =
-    "Contactanos";
-
-}, []);
   return (
     <Layout>
+        <SEO
+        title="Contacto | PixelTools Pro"
+        description="Ponte en contacto con PixelTools Pro para realizar consultas, informar problemas o enviar sugerencias sobre nuestras herramientas online."
+        />
 
       <LegalPage title="Contacto">
 

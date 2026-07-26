@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState} from "react";
 
 import Layout from "../components/layout/Layout";
 import HeroSection from "../components/hero/HeroSection";
@@ -8,7 +8,7 @@ import ToolInfo from "../components/toolinfo/ToolInfo";
 import { compressImage } from "../services/imageCompression";
 
 import "./CompressImage.css";
-
+import SEO from '../components/SEO/Seo'
 
 export default function CompressImage() {
 
@@ -199,16 +199,14 @@ export default function CompressImage() {
   RENDER
   ========================================
   */
-useEffect(() => {
 
-  document.title =
-    "Comprimir imágenes online gratis | PixelTools Pro";
-
-}, []);
   return (
 
     <Layout>
-
+    <SEO
+        title="Comprimir imágenes online gratis | PixelTools Pro"
+        description="Comprime imágenes online gratis y reduce su tamaño manteniendo una buena calidad. Optimiza tus imágenes fácilmente desde tu navegador con PixelTools Pro."
+    />
 
       {/* ========================================
           HERO + SUBIR IMAGEN

@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 
 import Layout from "../components/layout/Layout";
 
@@ -13,6 +13,7 @@ import ToolInfo from "../components/toolinfo/ToolInfo";
 import { removeBackground } from "../services/backgroundRemoval";
 
 import "./RemoveBackground.css"
+import SEO from "../components/SEO/Seo";
 
 export default function RemoveBackground() {
 
@@ -106,16 +107,16 @@ export default function RemoveBackground() {
   ========================================
   */
 
-  useEffect(() => {
-  document.title =
-    "Eliminar fondo de imágenes con IA | PixelTools Pro";
-}, []);
+
 
   return (
 
     <Layout>
 
-
+   <SEO
+      title="Eliminar fondo de imágenes con IA | PixelTools Pro"
+      description="Elimina el fondo de tus imágenes con inteligencia artificial. Procesa tus imágenes desde el navegador, edita el resultado y descarga tu imagen fácilmente."
+    />
       {/* ========================================
           HERO + SUBIR IMAGEN
       ======================================== */}

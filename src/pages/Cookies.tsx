@@ -1,17 +1,15 @@
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import { useEffect } from "react";
+import SEO  from "../components/SEO/Seo";
 export default function Cookies() {
 
-        useEffect(() => {
-    
-      document.title =
-        "Cookies";
-    
-    }, []);
+
 return ( 
 <Layout>
-
+    <SEO
+    title="Política de Cookies | PixelTools Pro"
+    description="Conoce cómo PixelTools Pro utiliza cookies y tecnologías similares para mejorar la experiencia de navegación y analizar el uso de nuestro sitio."
+    />
 
   <LegalPage title="Política de Cookies">
 

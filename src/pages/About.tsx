@@ -1,19 +1,20 @@
 
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import { useEffect } from "react";
+import SEO from "../components/SEO/Seo";
+
 
 export default function About() {
 
-        useEffect(() => {
-    
-      document.title =
-        "Sobre Nosotros";
-    
-    }, []);
+
 
   return (
     <Layout>
+
+        <SEO
+        title="Sobre Nosotros| PixelTools Pro"
+        description="Conoce PixelTools Pro, un proyecto creado para ofrecer herramientas online sencillas y accesibles para trabajar con imágenes directamente desde el navegador."
+        />
 
       <LegalPage title="Sobre PixelTools Pro">
 
