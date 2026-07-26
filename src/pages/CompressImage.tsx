@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import Layout from "../components/layout/Layout";
 import HeroSection from "../components/hero/HeroSection";
@@ -199,7 +199,12 @@ export default function CompressImage() {
   RENDER
   ========================================
   */
+useEffect(() => {
 
+  document.title =
+    "Comprimir imágenes online gratis | PixelTools Pro";
+
+}, []);
   return (
 
     <Layout>

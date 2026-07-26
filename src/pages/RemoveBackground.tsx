@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import Layout from "../components/layout/Layout";
 
@@ -105,6 +105,11 @@ export default function RemoveBackground() {
   RENDER
   ========================================
   */
+
+  useEffect(() => {
+  document.title =
+    "Eliminar fondo de imágenes con IA | PixelTools Pro";
+}, []);
 
   return (
 
