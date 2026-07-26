@@ -1,0 +1,92 @@
+.tool-info {
+  max-width: 900px;
+  margin: 50px auto 60px;
+  padding: 0 20px;
+  color: var(--text);
+}
+
+.tool-info-section {
+  margin-bottom: 40px;
+}
+
+.tool-info-section h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tool-info-text {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.tool-info-steps {
+  padding-left: 24px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.tool-info-steps li {
+  margin-bottom: 10px;
+}
+
+.tool-info-benefits {
+  padding-left: 24px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.tool-info-benefits li {
+  margin-bottom: 10px;
+}
+
+.tool-info-faqs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tool-info-faq {
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.tool-info-faq h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.tool-info-faq p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+
+  .tool-info {
+    margin-top: 40px;
+    padding: 0 16px;
+  }
+
+  .tool-info-section h2 {
+    font-size: 21px;
+  }
+
+  .tool-info-text,
+  .tool-info-steps,
+  .tool-info-benefits {
+    font-size: 15px;
+  }
+
+  .tool-info-faq {
+    padding: 16px;
+  }
+
+}

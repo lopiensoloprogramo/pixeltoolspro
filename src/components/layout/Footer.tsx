@@ -54,7 +54,7 @@ export default function Footer() {
             Términos y condiciones
           </Link>
           <Link to="/cookies">
-            Politica de cookies
+            Politica de Cookies
           </Link>
 
         </div>
