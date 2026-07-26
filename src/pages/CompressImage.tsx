@@ -245,17 +245,19 @@ export default function CompressImage() {
           PROCESANDO IMAGEN
       ======================================== */}
 
-      {loading && (
+        {loading && (
 
         <div className="processing">
 
-          <p>
+            <div className="loading-spinner"></div>
+
+            <p>
             Comprimiendo imagen...
-          </p>
+            </p>
 
         </div>
 
-      )}
+)}
 
 
 

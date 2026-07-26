@@ -1,0 +1,50 @@
+.processing {
+  width: 100%;
+  min-height: 250px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+
+  text-align: center;
+}
+
+
+.loading-spinner {
+  width: 45px;
+  height: 45px;
+
+  border: 4px solid #e2e8f0;
+  border-top-color: #4f46e5;
+
+  border-radius: 50%;
+
+  animation: spinner 0.8s linear infinite;
+}
+
+
+.processing p {
+  margin: 0;
+
+  color: #475569;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+@keyframes spinner {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}

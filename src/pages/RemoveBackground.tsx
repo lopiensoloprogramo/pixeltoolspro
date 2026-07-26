@@ -12,6 +12,7 @@ import ToolInfo from "../components/toolinfo/ToolInfo";
 
 import { removeBackground } from "../services/backgroundRemoval";
 
+import "./RemoveBackground.css"
 
 export default function RemoveBackground() {
 
@@ -150,17 +151,19 @@ export default function RemoveBackground() {
           PROCESANDO IMAGEN
       ======================================== */}
 
-      {loading && (
+        {loading && (
 
         <div className="processing">
 
-          <p>
+            <div className="loading-spinner"></div>
+
+            <p>
             Eliminando fondo...
-          </p>
+            </p>
 
         </div>
 
-      )}
+        )}
 
 
 
