@@ -13,7 +13,7 @@ import ToolInfo from "../components/toolinfo/ToolInfo";
 import { removeBackground } from "../services/backgroundRemoval";
 
 import "./RemoveBackground.css"
-import SEO from "../components/SEO/Seo";
+import Seo from "../components/SEO/Seo";
 
 export default function RemoveBackground() {
 
@@ -113,7 +113,7 @@ export default function RemoveBackground() {
 
     <Layout>
 
-   <SEO
+   <Seo
       title="Eliminar fondo de imágenes con IA | PixelTools Pro"
       description="Elimina el fondo de tus imágenes con inteligencia artificial. Procesa tus imágenes desde el navegador, edita el resultado y descarga tu imagen fácilmente."
     />

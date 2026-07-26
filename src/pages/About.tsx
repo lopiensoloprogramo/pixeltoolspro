@@ -1,7 +1,7 @@
 
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-import SEO from "../components/SEO/Seo";
+import Seo from "../components/SEO/Seo";
 
 
 export default function About() {
@@ -11,7 +11,7 @@ export default function About() {
   return (
     <Layout>
 
-        <SEO
+        <Seo
         title="Sobre Nosotros| PixelTools Pro"
         description="Conoce PixelTools Pro, un proyecto creado para ofrecer herramientas online sencillas y accesibles para trabajar con imágenes directamente desde el navegador."
         />

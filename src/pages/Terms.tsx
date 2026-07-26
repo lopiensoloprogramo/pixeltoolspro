@@ -1,7 +1,7 @@
 
 import Layout from "../components/layout/Layout";
 import LegalPage from "../components/legal/LegalPage";
-
+import Seo from "../components/SEO/Seo";
 
 export default function Terms() {
 
@@ -9,7 +9,10 @@ export default function Terms() {
 
   return (
     <Layout>
-
+         <Seo
+            title="Terminos y Condiciones | PixelTools Pro"
+            description="Consulta los Términos y Condiciones de uso de PixelTools Pro, sus herramientas online y los servicios disponibles en el sitio."
+          />
       <LegalPage title="Términos y Condiciones">
 
         <p>
