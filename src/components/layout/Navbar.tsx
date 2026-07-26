@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <header className="navbar">
 
-     <Link to="/">
+     <Link to="/eliminar-fondo">
             <div className="brand">
 
             <div className="brand-logo">
