@@ -9,6 +9,7 @@ return (
     <SeoComponent
     title="Política de Cookies | PixelTools Pro"
     description="Conoce cómo PixelTools Pro utiliza cookies y tecnologías similares para mejorar la experiencia de navegación y analizar el uso de nuestro sitio."
+    canonical="https://pixeltoolspro.com/cookies"
     />
 
   <LegalPage title="Política de Cookies">

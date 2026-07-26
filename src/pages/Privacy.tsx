@@ -10,6 +10,7 @@ export default function Privacy() {
         <SeoComponent
             title="Política de Privacidad | PixelTools Pro"
             description="Consulta la Política de Privacidad de PixelTools Pro y conoce cómo se recopila, utiliza y protege la información de los visitantes y usuarios del sitio."
+            canonical="https://pixeltoolspro.com/privacidad"
         />
       <LegalPage title="Política de Privacidad">
 

@@ -206,7 +206,8 @@ export default function CompressImage() {
     <SeoComponent
         title="Comprimir imágenes online gratis | PixelTools Pro"
         description="Comprime imágenes online gratis y reduce su tamaño manteniendo una buena calidad. Optimiza tus imágenes fácilmente desde tu navegador con PixelTools Pro."
-    />
+        canonical="https://pixeltoolspro.com/comprimir-imagen"
+   />
 
       {/* ========================================
           HERO + SUBIR IMAGEN

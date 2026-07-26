@@ -11,6 +11,7 @@ export default function Contact() {
         <SeoComponent
         title="Contacto | PixelTools Pro"
         description="Ponte en contacto con PixelTools Pro para realizar consultas, informar problemas o enviar sugerencias sobre nuestras herramientas online."
+        canonical="https://pixeltoolspro.com/contacto"
         />
 
       <LegalPage title="Contacto">

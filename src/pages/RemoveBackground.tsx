@@ -116,6 +116,8 @@ export default function RemoveBackground() {
    <SeoComponent
       title="Eliminar fondo de imágenes con IA | PixelTools Pro"
       description="Elimina el fondo de tus imágenes con inteligencia artificial. Procesa tus imágenes desde el navegador, edita el resultado y descarga tu imagen fácilmente."
+      canonical="https://pixeltoolspro.com/eliminar-fondo"
+      image="https://pixeltoolspro.com/og-image.png"
     />
       {/* ========================================
           HERO + SUBIR IMAGEN

@@ -14,6 +14,7 @@ export default function About() {
         <SeoComponent
         title="Sobre Nosotros| PixelTools Pro"
         description="Conoce PixelTools Pro, un proyecto creado para ofrecer herramientas online sencillas y accesibles para trabajar con imágenes directamente desde el navegador."
+        canonical="https://pixeltoolspro.com/sobre-nosotros"
         />
 
       <LegalPage title="Sobre PixelTools Pro">
