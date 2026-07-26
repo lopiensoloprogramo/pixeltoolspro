@@ -6,6 +6,7 @@ import Terms from "./pages/Terms";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
+import Cookies from "./pages/Cookies";
 
 function App() {
 
@@ -40,6 +41,10 @@ function App() {
         <Route
           path="/contacto"
           element={<Contact />}
+        />
+        <Route
+          path="/cookies"
+          element={<Cookies />}
         />
       </Routes>
 
