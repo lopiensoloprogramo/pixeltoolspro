@@ -7,7 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import Cookies from "./pages/Cookies";
-
+import ResizeImage from "./pages/ResizeImage";
 
 
 function App() {
@@ -51,6 +51,10 @@ function App() {
         <Route
           path="/cookies"
           element={<Cookies />}
+        />
+        <Route
+          path="/redimensionar-imagen"
+          element={<ResizeImage />}
         />
       </Routes>
 

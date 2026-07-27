@@ -1,0 +1,759 @@
+.resize-editor {
+
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 20px auto 0;
+
+  padding: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 30px
+    rgba(0, 0, 0, 0.06);
+
+  box-sizing: border-box;
+
+}
+
+
+.resize-editor-header {
+
+  text-align: center;
+
+  margin-bottom: 20px;
+
+}
+
+
+.resize-editor-header h2 {
+
+  margin: 0 0 8px;
+
+  color: #0f172a;
+
+}
+
+
+.resize-editor-header p {
+
+  margin: 0;
+
+  color: #64748b;
+
+}
+
+
+.resize-formats {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 20px;
+
+}
+
+
+.resize-formats button {
+
+  padding: 10px 16px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+
+  color: #334155;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+}
+
+
+.resize-formats button:hover {
+
+  background: #f1f5f9;
+
+}
+
+
+.resize-formats button.active {
+
+  background: #4f46e5;
+
+  border-color: #4f46e5;
+
+  color: #ffffff;
+
+}
+
+
+.resize-canvas-wrapper {
+
+  width: 100%;
+
+  min-height: 400px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  background:
+
+    linear-gradient(
+      45deg,
+      #cbd5e1 25%,
+      transparent 25%
+    ),
+
+    linear-gradient(
+      -45deg,
+      #cbd5e1 25%,
+      transparent 25%
+    ),
+
+    linear-gradient(
+      45deg,
+      transparent 75%,
+      #cbd5e1 75%
+    ),
+
+    linear-gradient(
+      -45deg,
+      transparent 75%,
+      #cbd5e1 75%
+    );
+
+  background-size: 24px 24px;
+
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0;
+
+  background-color: #f1f5f9;
+
+  border-radius: 12px;
+
+}
+
+
+.resize-canvas {
+
+  display: block;
+
+  max-width: 100%;
+
+  max-height: 600px;
+
+  width: auto;
+
+  height: auto;
+
+  cursor: grab;
+
+  touch-action: none;
+
+  box-shadow:
+    0 8px 30px
+    rgba(0, 0, 0, 0.25);
+
+}
+
+
+.resize-canvas:active {
+
+  cursor: grabbing;
+
+}
+
+
+.resize-controls {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 20px;
+
+}
+
+
+.resize-controls button {
+
+  width: 42px;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #f1f5f9;
+
+  color: #334155;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+
+.resize-controls button:hover {
+
+  background: #e2e8f0;
+
+}
+
+
+.resize-controls span {
+
+  min-width: 60px;
+
+  text-align: center;
+
+  color: #475569;
+
+  font-weight: 600;
+
+}
+
+
+.resize-actions {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-top: 20px;
+
+}
+
+
+.resize-actions button {
+
+  min-height: 42px;
+
+  padding: 10px 18px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+}
+
+
+.reset-button {
+
+  background: #f1f5f9;
+
+  color: #334155;
+
+}
+
+
+.download-button {
+
+  background: #4f46e5;
+
+  color: #ffffff;
+
+}
+
+
+.new-image-button {
+
+  background: #e2e8f0;
+
+  color: #334155;
+
+}
+
+/* ========================================
+   SECCIONES DE LA HERRAMIENTA
+======================================== */
+
+.resize-section-title {
+
+  width: 100%;
+
+  margin: 0 0 10px;
+
+  text-align: center;
+
+  color: #334155;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+
+/* ========================================
+   PLATAFORMAS
+======================================== */
+
+.resize-platforms {
+
+  margin-bottom: 20px;
+
+}
+
+
+.resize-platform-list {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+}
+
+
+.resize-platform-list button {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+
+  color: #334155;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+}
+
+
+.resize-platform-list button:hover {
+
+  background: #f1f5f9;
+
+}
+
+
+.resize-platform-list button.active {
+
+  background: #4f46e5;
+
+  border-color: #4f46e5;
+
+  color: #ffffff;
+
+}
+
+
+/* ========================================
+   PRESETS
+======================================== */
+
+.resize-presets {
+
+  margin-bottom: 20px;
+
+  padding: 16px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+}
+
+
+.resize-preset-list {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+}
+
+
+.resize-preset-list button {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 4px;
+
+  min-width: 150px;
+
+  padding: 12px 16px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #334155;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+}
+
+
+.resize-preset-list button:hover {
+
+  background: #f1f5f9;
+
+}
+
+
+.resize-preset-list button.active {
+
+  background: #4f46e5;
+
+  border-color: #4f46e5;
+
+  color: #ffffff;
+
+}
+
+
+.resize-preset-list button strong {
+
+  font-size: 14px;
+
+}
+
+
+.resize-preset-list button span {
+
+  font-size: 12px;
+
+  opacity: 0.8;
+
+}
+
+
+/* ========================================
+   FORMATO MANUAL
+======================================== */
+
+.resize-formats {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 20px;
+
+}
+
+
+.resize-formats .resize-section-title {
+
+  flex-basis: 100%;
+
+}
+/* ========================================
+   FONDO DEL RECORTE
+======================================== */
+
+.resize-background {
+
+  margin-top: 24px;
+
+  padding: 16px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+}
+
+
+.resize-background-options {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 24px;
+
+  flex-wrap: wrap;
+
+}
+
+
+.resize-background-options label {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #334155;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+}
+
+
+.resize-background-options input {
+
+  width: 16px;
+
+  height: 16px;
+
+  accent-color: #4f46e5;
+
+}
+
+
+.resize-color-picker {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 16px;
+
+  color: #334155;
+
+  font-size: 14px;
+
+}
+
+
+.resize-color-picker input[type="color"] {
+
+  width: 42px;
+
+  height: 32px;
+
+  padding: 2px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  cursor: pointer;
+
+}
+
+
+.resize-color-picker span {
+
+  font-family: monospace;
+
+  font-size: 13px;
+
+  color: #64748b;
+
+}
+
+
+@media (max-width: 700px) {
+
+  .resize-background-options {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+  }
+
+
+  .resize-color-picker {
+
+    flex-wrap: wrap;
+
+  }
+
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (
+  max-width: 700px
+) {
+
+  .resize-platform-list {
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+
+  .resize-platform-list button {
+
+    width: 100%;
+
+  }
+
+
+  .resize-preset-list {
+
+    flex-direction: column;
+
+  }
+
+
+  .resize-preset-list button {
+
+    width: 100%;
+
+  }
+
+
+  .resize-formats {
+
+    flex-direction: column;
+
+  }
+
+
+  .resize-formats button {
+
+    width: 100%;
+
+  }
+
+}
+
+@media (
+  max-width: 700px
+) {
+
+  .resize-editor {
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+  }
+
+
+  .resize-canvas-wrapper {
+
+    min-height: 300px;
+
+    padding: 10px;
+
+  }
+
+
+  .resize-formats button {
+
+    flex: 1;
+
+    min-width: 100px;
+
+  }
+
+
+  .resize-actions {
+
+    flex-direction: column;
+
+  }
+
+
+  .resize-actions button {
+
+    width: 100%;
+
+  }
+
+}
