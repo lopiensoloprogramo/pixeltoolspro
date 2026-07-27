@@ -8,11 +8,8 @@ import "./ResizeEditor.css";
 
 
 interface Props {
-
   image: string;
-
   onNewImage: () => void;
-
 }
 
 
@@ -29,32 +26,23 @@ type BackgroundMode =
 
 
 interface Preset {
-
   name: string;
-
   width: number;
-
   height: number;
-
   ratio: AspectRatio;
-
 }
 
 
 interface Platform {
-
   name: string;
-
   icon: string;
-
   presets: Preset[];
-
 }
 
 
 /*
 ========================================
-PRESETS
+PRESETS DE REDES SOCIALES
 ========================================
 */
 
@@ -62,193 +50,133 @@ const platforms: Platform[] = [
 
   {
     name: "WhatsApp",
-
     icon: "💬",
 
     presets: [
-
       {
         name: "Foto de perfil",
-
         width: 500,
-
         height: 500,
-
         ratio: "circle",
-
       },
-
     ],
-
   },
 
 
   {
     name: "Instagram",
-
     icon: "📸",
 
     presets: [
 
       {
         name: "Foto de perfil",
-
         width: 320,
-
         height: 320,
-
         ratio: "circle",
-
       },
 
       {
         name: "Publicación cuadrada",
-
         width: 1080,
-
         height: 1080,
-
         ratio: "square",
-
       },
 
       {
         name: "Publicación vertical",
-
         width: 1080,
-
         height: 1350,
-
         ratio: "portrait",
-
       },
 
       {
         name: "Historia",
-
         width: 1080,
-
         height: 1920,
-
         ratio: "portrait",
-
       },
 
     ],
-
   },
 
 
   {
     name: "Facebook",
-
     icon: "📘",
 
     presets: [
 
       {
         name: "Foto de perfil",
-
         width: 320,
-
         height: 320,
-
         ratio: "circle",
-
       },
 
       {
         name: "Portada",
-
         width: 851,
-
         height: 315,
-
         ratio: "landscape",
-
       },
 
       {
         name: "Publicación",
-
         width: 1200,
-
         height: 630,
-
         ratio: "landscape",
-
       },
 
     ],
-
   },
 
 
   {
     name: "YouTube",
-
     icon: "▶️",
 
     presets: [
 
       {
         name: "Foto de perfil",
-
         width: 800,
-
         height: 800,
-
         ratio: "circle",
-
       },
 
       {
         name: "Miniatura",
-
         width: 1280,
-
         height: 720,
-
         ratio: "landscape",
-
       },
 
       {
         name: "Portada del canal",
-
         width: 2560,
-
         height: 1440,
-
         ratio: "landscape",
-
       },
 
     ],
-
   },
 
 
   {
     name: "Google",
-
     icon: "🔎",
 
     presets: [
 
       {
         name: "Foto de perfil",
-
         width: 720,
-
         height: 720,
-
         ratio: "circle",
-
       },
 
     ],
-
   },
 
 ];
@@ -257,7 +185,6 @@ const platforms: Platform[] = [
 export default function ResizeEditor({
 
   image,
-
   onNewImage,
 
 }: Props) {
@@ -285,7 +212,6 @@ export default function ResizeEditor({
     useState({
 
       x: 0,
-
       y: 0,
 
     });
@@ -299,7 +225,6 @@ export default function ResizeEditor({
     useState({
 
       width: 500,
-
       height: 500,
 
     });
@@ -313,46 +238,12 @@ export default function ResizeEditor({
     useState<string | null>(null);
 
 
-  /*
-  ========================================
-  FONDO
-  ========================================
-  */
-
   const [backgroundMode, setBackgroundMode] =
     useState<BackgroundMode>("transparent");
 
 
   const [backgroundColor, setBackgroundColor] =
     useState("#ffffff");
-
-
-  /*
-  ========================================
-  IMPORTANTE
-
-  Indica si la imagen tiene transparencia.
-
-  Si es true y se selecciona circular,
-  hacemos que todo el contenido entre
-  dentro del círculo.
-
-  Si es false, NO alejamos automáticamente.
-  ========================================
-  */
-
-  const [hasTransparency, setHasTransparency] =
-    useState(false);
-
-
-  /*
-  ========================================
-  ESCALA AUTOMÁTICA PARA CÍRCULO
-  ========================================
-  */
-
-  const [circleFitScale, setCircleFitScale] =
-    useState(1);
 
 
   const [isDragging, setIsDragging] =
@@ -363,7 +254,6 @@ export default function ResizeEditor({
     useRef({
 
       x: 0,
-
       y: 0,
 
     });
@@ -373,138 +263,9 @@ export default function ResizeEditor({
     useRef({
 
       x: 0,
-
       y: 0,
 
     });
-
-
-  /*
-  ========================================
-  DETECTAR TRANSPARENCIA DE LA IMAGEN
-  ========================================
-  */
-
-  function detectImageTransparency(
-    img: HTMLImageElement
-  ) {
-
-    /*
-    ----------------------------------------
-    Creamos un canvas pequeño.
-    ----------------------------------------
-    */
-
-    const tempCanvas =
-      document.createElement("canvas");
-
-
-    const tempCtx =
-      tempCanvas.getContext("2d");
-
-
-    if (!tempCtx) {
-
-      return false;
-
-    }
-
-
-    /*
-    ----------------------------------------
-    Reducimos la imagen para analizarla.
-    ----------------------------------------
-    */
-
-    const size = 100;
-
-
-    tempCanvas.width = size;
-
-    tempCanvas.height = size;
-
-
-    tempCtx.clearRect(
-
-      0,
-
-      0,
-
-      size,
-
-      size
-
-    );
-
-
-    tempCtx.drawImage(
-
-      img,
-
-      0,
-
-      0,
-
-      size,
-
-      size
-
-    );
-
-
-    /*
-    ----------------------------------------
-    Revisamos los píxeles.
-    ----------------------------------------
-    */
-
-    const imageData =
-      tempCtx.getImageData(
-
-        0,
-
-        0,
-
-        size,
-
-        size
-
-      );
-
-
-    const data =
-      imageData.data;
-
-
-    /*
-    ----------------------------------------
-    Buscamos píxeles con alpha menor
-    que 255.
-    ----------------------------------------
-    */
-
-    for (
-
-      let i = 3;
-
-      i < data.length;
-
-      i += 4
-
-    ) {
-
-      if (data[i] < 250) {
-
-        return true;
-
-      }
-
-    }
-
-
-    return false;
-
-  }
 
 
   /*
@@ -524,28 +285,6 @@ export default function ResizeEditor({
       imageRef.current =
         img;
 
-
-      /*
-      ----------------------------------------
-      Detectar si la imagen tiene transparencia
-      ----------------------------------------
-      */
-
-      const transparent =
-        detectImageTransparency(img);
-
-
-      setHasTransparency(
-        transparent
-      );
-
-
-      /*
-      ----------------------------------------
-      Dibujar
-      ----------------------------------------
-      */
-
       drawCanvas();
 
     };
@@ -560,197 +299,120 @@ export default function ResizeEditor({
 
   /*
   ========================================
-  CALCULAR ESCALA PARA IMAGEN TRANSPARENTE
+  CAMBIAR FORMATO MANUAL
   ========================================
   */
 
-  function calculateCircleFitScale() {
+function changeAspectRatio(
+  ratio: AspectRatio
+) {
+
+  // 1. Quitamos SIEMPRE el preset seleccionado
+  setSelectedPreset(null);
+
+  // 2. Cambiamos el formato manual
+  setAspectRatio(ratio);
+
+
+  let width = 500;
+  let height = 500;
+
+
+  if (ratio === "portrait") {
+
+    width = 400;
+    height = 600;
+
+  }
+
+
+  if (ratio === "landscape") {
+
+    width = 600;
+    height = 400;
+
+  }
+
+
+  if (ratio === "circle") {
+
+    width = 500;
+    height = 500;
+
+  }
+
+
+  // Ajustar automáticamente la imagen
+  // SOLO cuando entramos a circular
+  if (
+    ratio === "circle" &&
+    aspectRatio !== "circle"
+  ) {
 
     const img =
       imageRef.current;
 
 
-    if (!img) {
+    if (img) {
 
-      return 1;
+      const containScale =
+        Math.min(
 
-    }
+          width /
+            img.naturalWidth,
 
+          height /
+            img.naturalHeight
 
-    /*
-    ----------------------------------------
-    Radio del círculo
-    ----------------------------------------
-    */
-
-    const radius =
-      Math.min(
-
-        canvasSize.width,
-
-        canvasSize.height
-
-      ) / 2;
+        );
 
 
-    /*
-    ----------------------------------------
-    Dejamos un pequeño margen.
+      const coverScale =
+        Math.max(
 
-    Esto evita que el contenido toque
-    exactamente el borde.
-    ----------------------------------------
-    */
+          width /
+            img.naturalWidth,
 
-    const safeDiameter =
-      radius * 2 * 0.92;
+          height /
+            img.naturalHeight
+
+        );
 
 
-    /*
-    ----------------------------------------
-    Calculamos escala para que toda
-    la imagen quepa dentro del círculo.
+      setZoom(
 
-    Usamos contain.
-    ----------------------------------------
-    */
+        Math.min(
 
-    const scale =
-      Math.min(
+          containScale /
+            coverScale,
 
-        safeDiameter /
-          img.naturalWidth,
+          1
 
-        safeDiameter /
-          img.naturalHeight
+        )
 
       );
 
-
-    return scale;
-
-  }
-
-
-  /*
-  ========================================
-  CAMBIAR FORMATO
-  ========================================
-  */
-
-  function changeAspectRatio(
-
-    ratio: AspectRatio
-
-  ) {
-
-    setAspectRatio(ratio);
-
-    setSelectedPreset(null);
-
-
-    let width = 500;
-
-    let height = 500;
-
-
-    if (ratio === "portrait") {
-
-      width = 400;
-
-      height = 600;
-
-    }
-
-
-    if (ratio === "landscape") {
-
-      width = 600;
-
-      height = 400;
-
-    }
-
-
-    if (ratio === "circle") {
-
-      width = 500;
-
-      height = 500;
-
-    }
-
-
-    setCanvasSize({
-
-      width,
-
-      height,
-
-    });
-
-
-    setPosition({
-
-      x: 0,
-
-      y: 0,
-
-    });
-
-
-    /*
-    ========================================
-    AQUÍ ESTÁ EL CAMBIO IMPORTANTE
-
-    SOLO al seleccionar circular.
-
-    Si la imagen tiene transparencia,
-    ajustamos automáticamente.
-
-    Si NO tiene transparencia,
-    dejamos escala 1.
-
-    NO tocamos esto al cambiar el color.
-    ========================================
-    */
-
-    if (
-
-      ratio === "circle" &&
-
-      hasTransparency
-
-    ) {
-
-      /*
-      ----------------------------------------
-      Usamos setTimeout porque canvasSize
-      todavía no se ha actualizado.
-      ----------------------------------------
-      */
-
-      setTimeout(() => {
-
-        const scale =
-          calculateCircleFitScale();
-
-
-        if (scale > 0) {
-
-          setCircleFitScale(scale);
-
-        }
-
-      }, 0);
-
-    } else {
-
-      setCircleFitScale(1);
-
     }
 
   }
+
+
+  setCanvasSize({
+
+    width,
+    height,
+
+  });
+
+
+  setPosition({
+
+    x: 0,
+    y: 0,
+
+  });
+
+}
 
 
   /*
@@ -771,6 +433,134 @@ export default function ResizeEditor({
 
     );
 
+
+    /*
+    ========================================
+    SI LA PLATAFORMA SOLO TIENE UN PRESET
+    SE SELECCIONA AUTOMÁTICAMENTE
+    ========================================
+    */
+
+    if (
+
+      platform.presets.length === 1
+
+    ) {
+
+      const preset =
+        platform.presets[0];
+
+
+      /*
+      ----------------------------------------
+      SELECCIONAR PRESET AUTOMÁTICAMENTE
+      ----------------------------------------
+      */
+
+      setSelectedPreset(
+
+        preset.name
+
+      );
+
+
+      setAspectRatio(
+
+        preset.ratio
+
+      );
+
+
+      setCanvasSize({
+
+        width:
+          preset.width,
+
+        height:
+          preset.height,
+
+      });
+
+
+      setPosition({
+
+        x: 0,
+        y: 0,
+
+      });
+
+
+      /*
+      ----------------------------------------
+      SI ES CIRCULAR, AJUSTAR LA IMAGEN
+      PARA QUE ENTRE COMPLETA
+      ----------------------------------------
+      */
+
+      if (
+
+        preset.ratio === "circle"
+
+      ) {
+
+        const img =
+          imageRef.current;
+
+
+        if (img) {
+
+          const containScale =
+            Math.min(
+
+              preset.width /
+                img.naturalWidth,
+
+              preset.height /
+                img.naturalHeight
+
+            );
+
+
+          const coverScale =
+            Math.max(
+
+              preset.width /
+                img.naturalWidth,
+
+              preset.height /
+                img.naturalHeight
+
+            );
+
+
+          setZoom(
+
+            Math.min(
+
+              containScale /
+                coverScale,
+
+              1
+
+            )
+
+          );
+
+        }
+
+      }
+
+      return;
+
+    }
+
+
+    /*
+    ========================================
+    SI TIENE VARIOS PRESETS
+    NO SELECCIONAR NINGUNO
+    ========================================
+    */
 
     setSelectedPreset(null);
 
@@ -796,6 +586,69 @@ export default function ResizeEditor({
     );
 
 
+    /*
+    ========================================
+    SI CAMBIAMOS A CIRCULAR DESDE OTRO
+    FORMATO, AJUSTAMOS EL ZOOM UNA SOLA VEZ
+    ========================================
+    */
+
+    if (
+
+      preset.ratio === "circle" &&
+
+      aspectRatio !== "circle"
+
+    ) {
+
+      const img =
+        imageRef.current;
+
+
+      if (img) {
+
+        const containScale =
+          Math.min(
+
+            preset.width /
+              img.naturalWidth,
+
+            preset.height /
+              img.naturalHeight
+
+          );
+
+
+        const coverScale =
+          Math.max(
+
+            preset.width /
+              img.naturalWidth,
+
+            preset.height /
+              img.naturalHeight
+
+          );
+
+
+        setZoom(
+
+          Math.min(
+
+            containScale /
+              coverScale,
+
+            1
+
+          )
+
+        );
+
+      }
+
+    }
+
+
     setAspectRatio(
 
       preset.ratio
@@ -817,45 +670,9 @@ export default function ResizeEditor({
     setPosition({
 
       x: 0,
-
       y: 0,
 
     });
-
-
-    /*
-    ----------------------------------------
-    IMPORTANTE
-
-    Al elegir un preset circular,
-    hacemos el ajuste automático SOLO
-    si la imagen es transparente.
-    ----------------------------------------
-    */
-
-    if (
-
-      preset.ratio === "circle" &&
-
-      hasTransparency
-
-    ) {
-
-      setTimeout(() => {
-
-        const scale =
-          calculateCircleFitScale();
-
-
-        setCircleFitScale(scale);
-
-      }, 0);
-
-    } else {
-
-      setCircleFitScale(1);
-
-    }
 
   }
 
@@ -904,18 +721,15 @@ export default function ResizeEditor({
 
     /*
     ========================================
-    LIMPIAR
+    LIMPIAR CANVAS
     ========================================
     */
 
     ctx.clearRect(
 
       0,
-
       0,
-
       canvas.width,
-
       canvas.height
 
     );
@@ -923,193 +737,8 @@ export default function ResizeEditor({
 
     /*
     ========================================
-    CÍRCULO
-
-    Todo lo que se dibuje aquí queda
-    limitado al círculo.
-    ========================================
-    */
-
-    if (
-
-      aspectRatio === "circle"
-
-    ) {
-
-      ctx.save();
-
-
-      ctx.beginPath();
-
-
-      ctx.arc(
-
-        canvas.width / 2,
-
-        canvas.height / 2,
-
-        Math.min(
-
-          canvas.width,
-
-          canvas.height
-
-        ) / 2,
-
-        0,
-
-        Math.PI * 2
-
-      );
-
-
-      ctx.closePath();
-
-
-      ctx.clip();
-
-
-      /*
-      ----------------------------------------
-      FONDO DEL CÍRCULO
-      ----------------------------------------
-      */
-
-      if (
-
-        backgroundMode === "color"
-
-      ) {
-
-        ctx.fillStyle =
-          backgroundColor;
-
-
-        ctx.fillRect(
-
-          0,
-
-          0,
-
-          canvas.width,
-
-          canvas.height
-
-        );
-
-      }
-
-
-      /*
-      ----------------------------------------
-      ESCALA DE LA IMAGEN
-      ----------------------------------------
-
-      Caso 1:
-      Imagen transparente:
-      usamos circleFitScale.
-
-      Caso 2:
-      Imagen normal:
-      usamos cover.
-      ----------------------------------------
-      */
-
-      let scale;
-
-
-      if (
-
-        hasTransparency
-
-      ) {
-
-        scale =
-          circleFitScale *
-          zoom;
-
-      } else {
-
-        scale =
-          Math.max(
-
-            canvas.width /
-              img.naturalWidth,
-
-            canvas.height /
-              img.naturalHeight
-
-          ) *
-          zoom;
-
-      }
-
-
-      const imageWidth =
-        img.naturalWidth *
-        scale;
-
-
-      const imageHeight =
-        img.naturalHeight *
-        scale;
-
-
-      const x =
-        (
-
-          canvas.width -
-          imageWidth
-
-        ) / 2
-        +
-        position.x;
-
-
-      const y =
-        (
-
-          canvas.height -
-          imageHeight
-
-        ) / 2
-        +
-        position.y;
-
-
-      ctx.drawImage(
-
-        img,
-
-        x,
-
-        y,
-
-        imageWidth,
-
-        imageHeight
-
-      );
-
-
-      ctx.restore();
-
-
-      return;
-
-    }
-
-
-    /*
-    ========================================
-    FORMATOS RECTANGULARES
-    ========================================
-    */
-
-    /*
-    ----------------------------------------
     FONDO DE COLOR
-    ----------------------------------------
+    ========================================
     */
 
     if (
@@ -1125,11 +754,8 @@ export default function ResizeEditor({
       ctx.fillRect(
 
         0,
-
         0,
-
         canvas.width,
-
         canvas.height
 
       );
@@ -1138,12 +764,13 @@ export default function ResizeEditor({
 
 
     /*
-    ----------------------------------------
-    COVER NORMAL
-    ----------------------------------------
+    ========================================
+    ESCALA BASE
+    ========================================
     */
 
     const scale =
+
       Math.max(
 
         canvas.width /
@@ -1152,55 +779,138 @@ export default function ResizeEditor({
         canvas.height /
           img.naturalHeight
 
-      ) *
-      zoom;
+      );
 
 
     const imageWidth =
+
       img.naturalWidth *
-      scale;
+      scale *
+      zoom;
 
 
     const imageHeight =
+
       img.naturalHeight *
-      scale;
+      scale *
+      zoom;
 
 
     const x =
+
       (
 
         canvas.width -
         imageWidth
 
       ) / 2
+
       +
+
       position.x;
 
 
     const y =
+
       (
 
         canvas.height -
         imageHeight
 
       ) / 2
+
       +
+
       position.y;
 
 
-    ctx.drawImage(
+    /*
+    ========================================
+    CIRCULAR
+    ========================================
+    */
 
-      img,
+    if (
 
-      x,
+      aspectRatio === "circle"
 
-      y,
+    ) {
 
-      imageWidth,
+      const radius =
 
-      imageHeight
+        Math.min(
 
-    );
+          canvas.width,
+
+          canvas.height
+
+        ) / 2;
+
+
+      ctx.save();
+
+
+      ctx.beginPath();
+
+
+      ctx.arc(
+
+        canvas.width / 2,
+
+        canvas.height / 2,
+
+        radius,
+
+        0,
+
+        Math.PI * 2
+
+      );
+
+
+      ctx.closePath();
+
+
+      ctx.clip();
+
+
+      ctx.drawImage(
+
+        img,
+
+        x,
+        y,
+
+        imageWidth,
+        imageHeight
+
+      );
+
+
+      ctx.restore();
+
+
+    } else {
+
+      /*
+      ========================================
+      FORMATOS RECTANGULARES
+      ========================================
+      */
+
+      ctx.drawImage(
+
+        img,
+
+        x,
+        y,
+
+        imageWidth,
+        imageHeight
+
+      );
+
+    }
 
   }
 
@@ -1218,20 +928,11 @@ export default function ResizeEditor({
   }, [
 
     zoom,
-
     position,
-
     aspectRatio,
-
     canvasSize,
-
     backgroundMode,
-
     backgroundColor,
-
-    circleFitScale,
-
-    hasTransparency,
 
   ]);
 
@@ -1300,39 +1001,23 @@ export default function ResizeEditor({
     setPosition({
 
       x: 0,
-
       y: 0,
 
     });
 
 
-    /*
-    ----------------------------------------
-    Si estamos en circular y la imagen
-    es transparente, volvemos a calcular
-    su escala inicial.
-    ----------------------------------------
-    */
+    setBackgroundMode(
 
-    if (
+      "transparent"
 
-      aspectRatio === "circle" &&
-
-      hasTransparency
-
-    ) {
-
-      const scale =
-        calculateCircleFitScale();
+    );
 
 
-      setCircleFitScale(scale);
+    setBackgroundColor(
 
-    } else {
+      "#ffffff"
 
-      setCircleFitScale(1);
-
-    }
+    );
 
   }
 
@@ -1384,12 +1069,6 @@ export default function ResizeEditor({
   }
 
 
-  /*
-  ========================================
-  MOVER IMAGEN
-  ========================================
-  */
-
   function handlePointerMove(
 
     event:
@@ -1405,35 +1084,37 @@ export default function ResizeEditor({
 
 
     const deltaX =
+
       event.clientX -
+
       dragStartRef.current.x;
 
 
     const deltaY =
+
       event.clientY -
+
       dragStartRef.current.y;
 
 
     setPosition({
 
       x:
+
         positionStartRef.current.x +
+
         deltaX,
 
       y:
+
         positionStartRef.current.y +
+
         deltaY,
 
     });
 
   }
 
-
-  /*
-  ========================================
-  TERMINAR ARRASTRE
-  ========================================
-  */
 
   function handlePointerUp(
 
@@ -1447,19 +1128,23 @@ export default function ResizeEditor({
 
     if (
 
-      event.currentTarget.hasPointerCapture(
+      event.currentTarget
 
-        event.pointerId
+        .hasPointerCapture(
 
-      )
+          event.pointerId
+
+        )
 
     ) {
 
-      event.currentTarget.releasePointerCapture(
+      event.currentTarget
 
-        event.pointerId
+        .releasePointerCapture(
 
-      );
+          event.pointerId
+
+        );
 
     }
 
@@ -1468,56 +1153,17 @@ export default function ResizeEditor({
 
   /*
   ========================================
-  DESCARGAR
+  DESCARGAR IMAGEN
   ========================================
   */
 
- /*
-========================================
-DESCARGAR IMAGEN
-========================================
-*/
+  function downloadImage() {
 
-function downloadImage() {
-
-  const canvas =
-    canvasRef.current;
+    const canvas =
+      canvasRef.current;
 
 
-  if (!canvas) {
-
-    return;
-
-  }
-
-
-  /*
-  ========================================
-  SI ES CIRCULAR Y TRANSPARENTE
-  ========================================
-  */
-
-  if (
-    aspectRatio === "circle" &&
-    backgroundMode === "transparent"
-  ) {
-
-    const exportCanvas =
-      document.createElement("canvas");
-
-
-    exportCanvas.width =
-      canvas.width;
-
-    exportCanvas.height =
-      canvas.height;
-
-
-    const ctx =
-      exportCanvas.getContext("2d");
-
-
-    if (!ctx) {
+    if (!canvas) {
 
       return;
 
@@ -1525,94 +1171,149 @@ function downloadImage() {
 
 
     /*
-    ----------------------------------------
-    ASEGURAR TRANSPARENCIA
-    ----------------------------------------
+    ========================================
+    CIRCULAR + TRANSPARENTE
+    ========================================
     */
 
-    ctx.clearRect(
+    if (
 
-      0,
+      aspectRatio === "circle" &&
 
-      0,
+      backgroundMode === "transparent"
 
-      exportCanvas.width,
+    ) {
 
-      exportCanvas.height
+      const exportCanvas =
+        document.createElement(
 
-    );
+          "canvas"
+
+        );
 
 
-    /*
-    ----------------------------------------
-    CREAR CÍRCULO PERFECTO
-    ----------------------------------------
-    */
+      exportCanvas.width =
+        canvas.width;
 
-    const radius =
-      Math.min(
 
+      exportCanvas.height =
+        canvas.height;
+
+
+      const ctx =
+        exportCanvas.getContext(
+
+          "2d"
+
+        );
+
+
+      if (!ctx) {
+
+        return;
+
+      }
+
+
+      ctx.clearRect(
+
+        0,
+        0,
         exportCanvas.width,
-
         exportCanvas.height
 
-      ) / 2;
+      );
 
 
-    ctx.save();
+      const radius =
+
+        Math.min(
+
+          exportCanvas.width,
+
+          exportCanvas.height
+
+        ) / 2;
 
 
-    ctx.beginPath();
+      ctx.save();
 
 
-    ctx.arc(
-
-      exportCanvas.width / 2,
-
-      exportCanvas.height / 2,
-
-      radius,
-
-      0,
-
-      Math.PI * 2
-
-    );
+      ctx.beginPath();
 
 
-    ctx.closePath();
+      ctx.arc(
+
+        exportCanvas.width / 2,
+
+        exportCanvas.height / 2,
+
+        radius,
+
+        0,
+
+        Math.PI * 2
+
+      );
 
 
-    ctx.clip();
+      ctx.closePath();
+
+
+      ctx.clip();
+
+
+      ctx.drawImage(
+
+        canvas,
+
+        0,
+        0
+
+      );
+
+
+      ctx.restore();
+
+
+      exportCanvas.toBlob(
+
+        blob => {
+
+          if (!blob) {
+
+            return;
+
+          }
+
+
+          downloadBlob(
+
+            blob,
+
+            "pixeltools-imagen-circular"
+
+          );
+
+        },
+
+        "image/png"
+
+      );
+
+
+      return;
+
+    }
 
 
     /*
-    ----------------------------------------
-    DIBUJAR EL CANVAS ORIGINAL
-    ----------------------------------------
+    ========================================
+    DESCARGA NORMAL
+    ========================================
     */
 
-    ctx.drawImage(
-
-      canvas,
-
-      0,
-
-      0
-
-    );
-
-
-    ctx.restore();
-
-
-    /*
-    ----------------------------------------
-    DESCARGAR
-    ----------------------------------------
-    */
-
-    exportCanvas.toBlob(
+    canvas.toBlob(
 
       blob => {
 
@@ -1623,68 +1324,13 @@ function downloadImage() {
         }
 
 
-        const url =
-          URL.createObjectURL(blob);
+        downloadBlob(
 
+          blob,
 
-        const link =
-          document.createElement("a");
+          "pixeltools-imagen-redimensionada"
 
-
-        link.href =
-          url;
-
-
-        let fileName =
-          "pixeltools-imagen-circular";
-
-
-        if (selectedPlatform) {
-
-          fileName +=
-
-            "-" +
-
-            selectedPlatform
-              .toLowerCase()
-              .replace(
-                /\s+/g,
-                "-"
-              );
-
-        }
-
-
-        if (selectedPreset) {
-
-          fileName +=
-
-            "-" +
-
-            selectedPreset
-              .toLowerCase()
-              .replace(
-                /\s+/g,
-                "-"
-              );
-
-        }
-
-
-        link.download =
-          `${fileName}.png`;
-
-
-        document.body.appendChild(link);
-
-
-        link.click();
-
-
-        document.body.removeChild(link);
-
-
-        URL.revokeObjectURL(url);
+        );
 
       },
 
@@ -1692,99 +1338,109 @@ function downloadImage() {
 
     );
 
-
-    return;
-
   }
 
 
   /*
   ========================================
-  DESCARGA NORMAL
+  DESCARGAR BLOB
   ========================================
   */
 
-  canvas.toBlob(
+  function downloadBlob(
 
-    blob => {
+    blob: Blob,
 
-      if (!blob) {
+    baseName: string
 
-        return;
+  ) {
 
-      }
-
-
-      const url =
-        URL.createObjectURL(blob);
+    const url =
+      URL.createObjectURL(blob);
 
 
-      const link =
-        document.createElement("a");
+    const link =
+      document.createElement("a");
 
 
-      link.href =
-        url;
+    link.href =
+      url;
 
 
-      let fileName =
-        "pixeltools-imagen-redimensionada";
+    let fileName =
+      baseName;
 
 
-      if (selectedPlatform) {
+    if (selectedPlatform) {
 
-        fileName +=
+      fileName +=
 
-          "-" +
+        "-" +
 
-          selectedPlatform
-            .toLowerCase()
-            .replace(
-              /\s+/g,
-              "-"
-            );
+        selectedPlatform
 
-      }
+          .toLowerCase()
 
+          .replace(
 
-      if (selectedPreset) {
+            /\s+/g,
 
-        fileName +=
+            "-"
 
-          "-" +
+          );
 
-          selectedPreset
-            .toLowerCase()
-            .replace(
-              /\s+/g,
-              "-"
-            );
-
-      }
+    }
 
 
-      link.download =
-        `${fileName}.png`;
+    if (selectedPreset) {
+
+      fileName +=
+
+        "-" +
+
+        selectedPreset
+
+          .toLowerCase()
+
+          .replace(
+
+            /\s+/g,
+
+            "-"
+
+          );
+
+    }
 
 
-      document.body.appendChild(link);
+    link.download =
+      `${fileName}.png`;
 
 
-      link.click();
+    document.body.appendChild(
+
+      link
+
+    );
 
 
-      document.body.removeChild(link);
+    link.click();
 
 
-      URL.revokeObjectURL(url);
+    document.body.removeChild(
 
-    },
+      link
 
-    "image/png"
+    );
 
-  );
 
-}
+    URL.revokeObjectURL(
+
+      url
+
+    );
+
+  }
 
 
   /*
@@ -1834,479 +1490,571 @@ function downloadImage() {
       </div>
 
 
-      {/* PLATAFORMAS */}
-
-      <div className="resize-platforms">
-
-        <p className="resize-section-title">
-
-          ¿Dónde vas a utilizar tu imagen?
-
-        </p>
+      <div className="resize-editor-layout">
 
 
-        <div className="resize-platform-list">
+        {/* ========================================
+            PANEL IZQUIERDO
+        ======================================== */}
 
-          {platforms.map(
+        <aside className="resize-sidebar">
 
-            platform => (
+
+          {/* PLATAFORMAS */}
+
+          <div className="resize-sidebar-section">
+
+            <p className="resize-section-title">
+
+              ¿Dónde vas a utilizar tu imagen?
+
+            </p>
+
+
+            <div className="resize-platform-list">
+
+              {platforms.map(
+
+                platform => (
+
+                  <button
+
+                    key={
+                      platform.name
+                    }
+
+                    className={
+
+                      selectedPlatform ===
+                      platform.name
+
+                        ? "active"
+
+                        : ""
+
+                    }
+
+                    onClick={() =>
+                      selectPlatform(
+
+                        platform
+
+                      )
+
+                    }
+
+                  >
+
+                    <span>
+
+                      {platform.icon}
+
+                    </span>
+
+
+                    {platform.name}
+
+                  </button>
+
+                )
+
+              )}
+
+            </div>
+
+          </div>
+
+
+          {/* PRESETS */}
+
+          {currentPlatform && (
+
+            <div className="resize-sidebar-section resize-presets">
+
+              <p className="resize-section-title">
+
+                Formatos de {currentPlatform.name}
+
+              </p>
+
+
+              <div className="resize-preset-list">
+
+                {currentPlatform.presets.map(
+
+                  preset => (
+
+                    <button
+
+                      key={
+                        preset.name
+                      }
+
+                      className={
+
+                        selectedPreset ===
+                        preset.name
+
+                          ? "active"
+
+                          : ""
+
+                      }
+
+                      onClick={() =>
+                        selectPreset(
+
+                          preset
+
+                        )
+
+                      }
+
+                    >
+
+                      <strong>
+
+                        {preset.name}
+
+                      </strong>
+
+
+                      <span>
+
+                        {preset.width} ×{" "}
+
+                        {preset.height} px
+
+                      </span>
+
+                    </button>
+
+                  )
+
+                )}
+
+              </div>
+
+            </div>
+
+          )}
+
+
+          {/* FORMATOS */}
+
+          <div className="resize-sidebar-section">
+
+            <p className="resize-section-title">
+
+              Formato
+
+            </p>
+
+
+            <div className="resize-formats">
+
+
+              <button
+                className={
+                    aspectRatio === "square" &&
+                    selectedPreset === null
+                    ? "active"
+                    : ""
+                }
+                onClick={() =>
+                    changeAspectRatio("square")
+                }
+                >
+                ⬜
+                <span>
+                    Cuadrado
+                </span>
+                </button>
+
 
               <button
 
-                key={platform.name}
-
                 className={
-
-                  selectedPlatform ===
-                  platform.name
-
+                aspectRatio === "portrait" &&
+                selectedPreset === null
                     ? "active"
-
                     : ""
-
                 }
-
                 onClick={() =>
-                  selectPlatform(platform)
+                  changeAspectRatio(
+
+                    "portrait"
+
+                  )
 
                 }
 
               >
 
+                ▯
+
                 <span>
 
-                  {platform.icon}
+                  Vertical
 
                 </span>
 
+              </button>
 
-                {platform.name}
+
+              <button
+
+                className={
+                aspectRatio === "landscape" &&
+                selectedPreset === null
+                    ? "active"
+                    : ""
+                }
+
+                onClick={() =>
+                  changeAspectRatio(
+
+                    "landscape"
+
+                  )
+
+                }
+
+              >
+
+                ▭
+
+                <span>
+
+                  Horizontal
+
+                </span>
 
               </button>
 
-            )
 
-          )}
+              <button
 
-        </div>
+                className={
+                aspectRatio === "circle" &&
+                selectedPreset === null
+                    ? "active"
+                    : ""
+                }
 
-      </div>
+                onClick={() =>
+                  changeAspectRatio(
+
+                    "circle"
+
+                  )
+
+                }
+
+              >
+
+                ⭕
 
 
-      {/* PRESETS */}
+                <span>
 
-      {currentPlatform && (
+                  Circular
 
-        <div className="resize-presets">
+                </span>
 
-          <p className="resize-section-title">
-
-            Selecciona el formato
-
-          </p>
+              </button>
 
 
-          <div className="resize-preset-list">
+            </div>
 
-            {currentPlatform.presets.map(
+          </div>
 
-              preset => (
 
-                <button
+          {/* FONDO */}
 
-                  key={preset.name}
+          <div className="resize-sidebar-section">
 
-                  className={
+            <p className="resize-section-title">
 
-                    selectedPreset ===
-                    preset.name
+              Fondo del recorte
 
-                      ? "active"
+            </p>
 
-                      : ""
+
+            <div className="resize-background-options">
+
+
+              <label>
+
+                <input
+
+                  type="radio"
+
+                  name="backgroundMode"
+
+                  checked={
+
+                    backgroundMode ===
+                    "transparent"
 
                   }
 
-                  onClick={() =>
-                    selectPreset(preset)
+                  onChange={() =>
+                    setBackgroundMode(
+
+                      "transparent"
+
+                    )
 
                   }
 
-                >
-
-                  <strong>
-
-                    {preset.name}
-
-                  </strong>
+                />
 
 
-                  <span>
+                <span>
 
-                    {preset.width} ×{" "}
+                  Transparente
 
-                    {preset.height} px
+                </span>
 
-                  </span>
+              </label>
 
-                </button>
 
-              )
+              <label>
+
+                <input
+
+                  type="radio"
+
+                  name="backgroundMode"
+
+                  checked={
+
+                    backgroundMode ===
+                    "color"
+
+                  }
+
+                  onChange={() =>
+                    setBackgroundMode(
+
+                      "color"
+
+                    )
+
+                  }
+
+                />
+
+
+                <span>
+
+                  Color de fondo
+
+                </span>
+
+              </label>
+
+            </div>
+
+
+            {backgroundMode === "color" && (
+
+              <div className="resize-color-picker">
+
+                <label htmlFor="background-color">
+
+                  Color:
+
+                </label>
+
+
+                <input
+
+                  id="background-color"
+
+                  type="color"
+
+                  value={
+                    backgroundColor
+                  }
+
+                  onChange={event =>
+                    setBackgroundColor(
+
+                      event.target.value
+
+                    )
+
+                  }
+
+                />
+
+
+                <span>
+
+                  {backgroundColor}
+
+                </span>
+
+              </div>
 
             )}
 
           </div>
 
-        </div>
 
-      )}
+          {/* ACCIONES */}
 
+          <div className="resize-sidebar-actions">
 
-      {/* FORMATOS */}
 
-      <div className="resize-formats">
+            <button
 
-        <p className="resize-section-title">
+              className="reset-button"
 
-          O elige un formato
-
-        </p>
-
-
-        <button
-
-          className={
-
-            aspectRatio === "square" &&
-            !selectedPreset
-
-              ? "active"
-
-              : ""
-
-          }
-
-          onClick={() =>
-            changeAspectRatio("square")
-
-          }
-
-        >
-
-          ⬜ Cuadrado
-
-        </button>
-
-
-        <button
-
-          className={
-
-            aspectRatio === "portrait" &&
-            !selectedPreset
-
-              ? "active"
-
-              : ""
-
-          }
-
-          onClick={() =>
-            changeAspectRatio("portrait")
-
-          }
-
-        >
-
-          ▯ Vertical
-
-        </button>
-
-
-        <button
-
-          className={
-
-            aspectRatio === "landscape" &&
-            !selectedPreset
-
-              ? "active"
-
-              : ""
-
-          }
-
-          onClick={() =>
-            changeAspectRatio("landscape")
-
-          }
-
-        >
-
-          ▭ Horizontal
-
-        </button>
-
-
-        <button
-
-          className={
-
-            aspectRatio === "circle" &&
-            !selectedPreset
-
-              ? "active"
-
-              : ""
-
-          }
-
-          onClick={() =>
-            changeAspectRatio("circle")
-
-          }
-
-        >
-
-          ⭕ Circular
-
-        </button>
-
-      </div>
-
-
-      {/* CANVAS */}
-
-      <div className="resize-canvas-wrapper">
-
-        <canvas
-
-          ref={canvasRef}
-
-          className="resize-canvas"
-
-          onPointerDown={handlePointerDown}
-
-          onPointerMove={handlePointerMove}
-
-          onPointerUp={handlePointerUp}
-
-          onPointerCancel={handlePointerUp}
-
-        />
-
-      </div>
-
-
-      {/* ZOOM */}
-
-      <div className="resize-controls">
-
-        <button
-
-          onClick={zoomOut}
-
-          aria-label="Alejar imagen"
-
-        >
-
-          −
-
-        </button>
-
-
-        <span>
-
-          {Math.round(zoom * 100)}%
-
-        </span>
-
-
-        <button
-
-          onClick={zoomIn}
-
-          aria-label="Acercar imagen"
-
-        >
-
-          +
-
-        </button>
-
-      </div>
-
-
-      {/* FONDO */}
-
-      <div className="resize-background">
-
-        <p className="resize-section-title">
-
-          Fondo del recorte
-
-        </p>
-
-
-        <div className="resize-background-options">
-
-          <label>
-
-            <input
-
-              type="radio"
-
-              name="backgroundMode"
-
-              checked={
-
-                backgroundMode ===
-                "transparent"
-
+              onClick={
+                resetEditor
               }
 
-              onChange={() =>
-                setBackgroundMode(
+            >
 
-                  "transparent"
+              ↺ Restablecer
 
-                )
+            </button>
 
+
+            <button
+
+              className="download-button"
+
+              onClick={
+                downloadImage
               }
 
-            />
+            >
 
-            <span>
+              ⬇ Descargar
 
-              Transparente
-
-            </span>
-
-          </label>
+            </button>
 
 
-          <label>
+            <button
 
-            <input
+              className="new-image-button"
 
-              type="radio"
-
-              name="backgroundMode"
-
-              checked={
-
-                backgroundMode ===
-                "color"
-
+              onClick={
+                onNewImage
               }
 
-              onChange={() =>
-                setBackgroundMode(
+            >
 
-                  "color"
+              ↻ Nueva imagen
 
-                )
+            </button>
 
-              }
-
-            />
-
-            <span>
-
-              Color de fondo
-
-            </span>
-
-          </label>
-
-        </div>
-
-
-        {backgroundMode === "color" && (
-
-          <div className="resize-color-picker">
-
-            <label htmlFor="background-color">
-
-              Color de fondo:
-
-            </label>
-
-
-            <input
-
-              id="background-color"
-
-              type="color"
-
-              value={backgroundColor}
-
-              onChange={event =>
-                setBackgroundColor(
-
-                  event.target.value
-
-                )
-
-              }
-
-            />
-
-
-            <span>
-
-              {backgroundColor}
-
-            </span>
 
           </div>
 
-        )}
 
-      </div>
-
-
-      {/* ACCIONES */}
-
-      <div className="resize-actions">
-
-        <button
-
-          className="reset-button"
-
-          onClick={resetEditor}
-
-        >
-
-          ↺ Restablecer
-
-        </button>
+        </aside>
 
 
-        <button
+        {/* ========================================
+            ÁREA DEL EDITOR
+        ======================================== */}
 
-          className="download-button"
-
-          onClick={downloadImage}
-
-        >
-
-          ⬇ Descargar
-
-        </button>
+        <main className="resize-workspace">
 
 
-        <button
+          <div className="resize-canvas-wrapper">
 
-          className="new-image-button"
+            <canvas
 
-          onClick={onNewImage}
+              ref={
+                canvasRef
+              }
 
-        >
+              className="resize-canvas"
 
-          ↻ Nueva imagen
+              onPointerDown={
+                handlePointerDown
+              }
 
-        </button>
+              onPointerMove={
+                handlePointerMove
+              }
+
+              onPointerUp={
+                handlePointerUp
+              }
+
+              onPointerCancel={
+                handlePointerUp
+              }
+
+            />
+
+          </div>
+
+
+          {/* ZOOM */}
+
+          <div className="resize-controls">
+
+            <button
+
+              onClick={
+                zoomOut
+              }
+
+              aria-label="Alejar imagen"
+
+            >
+
+              −
+
+            </button>
+
+
+            <span>
+
+              {Math.round(
+
+                zoom * 100
+
+              )}%
+
+
+            </span>
+
+
+            <button
+
+              onClick={
+                zoomIn
+              }
+
+              aria-label="Acercar imagen"
+
+            >
+
+              +
+
+            </button>
+
+          </div>
+
+
+          <p className="resize-workspace-hint">
+
+            Arrastra la imagen para ajustar su posición
+
+          </p>
+
+
+        </main>
+
 
       </div>
 
