@@ -21,6 +21,7 @@ interface Props {
   mode: "erase" | "restore" | null;
   brushSize: number;
   zoom: number;
+  
 }
 
 
@@ -34,6 +35,7 @@ export interface EditorCanvasRef {
   undo: () => void;
   redo: () => void;
   download: () => void;
+  exportImage: () => Promise<string>;
 }
 
 
@@ -577,12 +579,13 @@ const EditorCanvas = forwardRef<
   ========================================
   */
 
-  useImperativeHandle(
+ useImperativeHandle(
   ref,
   () => ({
     undo,
     redo,
     download,
+    exportImage,
   }),
 );
 
@@ -1035,6 +1038,7 @@ const EditorCanvas = forwardRef<
   RENDER
   ========================================
   */
+ 
 
   function download() {
   const canvas =
@@ -1080,6 +1084,29 @@ const EditorCanvas = forwardRef<
     "image/png"
   );
 }
+
+async function exportImage(): Promise<string> {
+
+  const canvas =
+    canvasRef.current;
+
+  if (!canvas) {
+
+    throw new Error(
+      "Canvas no disponible."
+    );
+
+  }
+
+  return canvas.toDataURL(
+    "image/png"
+  );
+
+}
+
+
+
+
 
   return (
 

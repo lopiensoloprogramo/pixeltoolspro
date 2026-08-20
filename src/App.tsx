@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import Cookies from "./pages/Cookies";
 import ResizeImage from "./pages/ResizeImage";
-
+import FormalPhoto from "./pages/FormalPhoto";
 
 function App() {
 
@@ -56,7 +56,12 @@ function App() {
           path="/redimensionar-imagen"
           element={<ResizeImage />}
         />
+        <Route
+          path="/foto-formal"
+          element={<FormalPhoto />}
+        />
       </Routes>
+
 
     </BrowserRouter>
 

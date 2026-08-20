@@ -15,6 +15,9 @@ interface Props {
 
   onDownload: () => void;
   onNewImage: () => void;
+  onContinue?: () => void;
+  continueText?: string;
+  
 }
 
 export default function EditorToolbar({
@@ -32,6 +35,8 @@ export default function EditorToolbar({
 
   onDownload,
   onNewImage,
+  onContinue,
+  continueText,
 }: Props) {
 
   return (
@@ -164,15 +169,24 @@ export default function EditorToolbar({
       <div className="toolbar-group">
 
         <button
-          type="button"
-          className="toolbar-button download-button"
-          onClick={onDownload}
-          title="Descargar imagen"
+        type="button"
+        className="toolbar-button download-button"
+        onClick={
+            onContinue
+            ? onContinue
+            : onDownload
+        }
+        title={
+            onContinue
+            ? "Continuar"
+            : "Descargar imagen"
+        }
         >
-          ⬇
-          <span>
-            Descargar
-          </span>
+        {onContinue ? "➡" : "⬇"}
+
+        <span>
+            {continueText ?? "Descargar"}
+        </span>
         </button>
 
 

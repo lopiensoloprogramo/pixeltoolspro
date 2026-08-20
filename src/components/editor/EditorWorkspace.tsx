@@ -1,247 +1,126 @@
 import { useRef, useState } from "react";
 
 import EditorToolbar from "../toolbar/EditorToolbar";
-
 import EditorCanvas from "./EditorCanvas";
 import type { EditorCanvasRef } from "./EditorCanvas";
 
 import "./EditorWorkspace.css";
-
 
 interface Props {
   image: string;
   result: string;
 
   onNewImage: () => void;
-}
 
+  action?: "download" | "continue";
+  onContinue?: (image: string) => void;
+}
 
 export default function EditorWorkspace({
   image,
   result,
   onNewImage,
+  action = "download",
+  onContinue,
 }: Props) {
 
-  /*
-  ========================================
-  HERRAMIENTA ACTIVA
-  ========================================
-  */
-
   const [mode, setMode] =
-    useState<
-      "erase" |
-      "restore" |
-      null
-    >(null);
-
-
-  /*
-  ========================================
-  TAMAÑO DEL PINCEL
-  ========================================
-  */
+    useState<"erase" | "restore" | null>(null);
 
   const [brushSize, setBrushSize] =
     useState(30);
 
-
-  /*
-  ========================================
-  ZOOM
-  ========================================
-  */
-
   const [zoom, setZoom] =
     useState(100);
-
-
-  /*
-  ========================================
-  REFERENCIA AL EDITOR CANVAS
-  ========================================
-  */
 
   const editorCanvasRef =
     useRef<EditorCanvasRef>(null);
 
-
-  /*
-  ========================================
-  AUMENTAR ZOOM
-  ========================================
-  */
-
   function handleZoomIn() {
-
-    setZoom((current) =>
-      Math.min(
-        current + 25,
-        300
-      )
-    );
-
+    setZoom((current) => Math.min(current + 25, 300));
   }
-
-
-  /*
-  ========================================
-  REDUCIR ZOOM
-  ========================================
-  */
 
   function handleZoomOut() {
-
-    setZoom((current) =>
-      Math.max(
-        current - 25,
-        25
-      )
-    );
-
+    setZoom((current) => Math.max(current - 25, 25));
   }
 
+  async function handleContinue() {
 
-  /*
-  ========================================
-  RENDER
-  ========================================
-  */
+    if (!onContinue) return;
+
+    const edited =
+      await editorCanvasRef.current?.exportImage();
+
+    if (!edited) return;
+
+    onContinue(edited);
+
+  }
 
   return (
+    <section className="editor-workspace">
 
-    <section
-      className="editor-workspace"
-    >
+      <EditorToolbar
+        mode={mode}
+        zoom={zoom}
 
-      {/* ========================================
-          TOOLBAR
-      ======================================== */}
+        onErase={() => setMode("erase")}
+        onRestore={() => setMode("restore")}
 
-<EditorToolbar
+        onUndo={() => editorCanvasRef.current?.undo()}
+        onRedo={() => editorCanvasRef.current?.redo()}
 
-  mode={mode}
+        onZoomIn={handleZoomIn}
+        onZoomOut={handleZoomOut}
 
-  zoom={zoom}
+        onDownload={() =>
+          editorCanvasRef.current?.download()
+        }
 
-  onErase={() => {
-    setMode("erase");
-  }}
+        onContinue={
+          action === "continue"
+            ? handleContinue
+            : undefined
+        }
 
-  onRestore={() => {
-    setMode("restore");
-  }}
+        continueText={
+          action === "continue"
+            ? "Aplicar traje"
+            : undefined
+        }
 
-  onUndo={() => {
-    editorCanvasRef.current?.undo();
-  }}
+        onNewImage={onNewImage}
+      />
 
-  onRedo={() => {
-    editorCanvasRef.current?.redo();
-  }}
+      <div className="brush-controls">
 
-  onZoomIn={
-    handleZoomIn
-  }
-
-  onZoomOut={
-    handleZoomOut
-  }
-
-  onDownload={() => {
-    editorCanvasRef.current?.download();
-  }}
-
-  onNewImage={
-    onNewImage
-  }
-
-/>
-
-
-      {/* ========================================
-          CONTROL DEL PINCEL
-      ======================================== */}
-
-      <div
-        className="brush-controls"
-      >
-
-        <span>
-          Tamaño del pincel
-        </span>
-
+        <span>Tamaño del pincel</span>
 
         <input
-
           type="range"
-
           min="5"
-
           max="200"
-
-          value={
-            brushSize
-          }
-
-          onChange={(event) => {
-
+          value={brushSize}
+          onChange={(event) =>
             setBrushSize(
-
-              Number(
-                event.target.value
-              )
-
-            );
-
-          }}
-
+              Number(event.target.value)
+            )
+          }
         />
 
-
-        <span>
-
-          {brushSize}px
-
-        </span>
+        <span>{brushSize}px</span>
 
       </div>
 
-
-      {/* ========================================
-          EDITOR CANVAS
-      ======================================== */}
-
       <EditorCanvas
-
-        ref={
-          editorCanvasRef
-        }
-
-        image={
-          image
-        }
-
-        result={
-          result
-        }
-
-        mode={
-          mode
-        }
-
-        brushSize={
-          brushSize
-        }
-
-        zoom={
-          zoom
-        }
-
+        ref={editorCanvasRef}
+        image={image}
+        result={result}
+        mode={mode}
+        brushSize={brushSize}
+        zoom={zoom}
       />
 
     </section>
-
   );
-
 }

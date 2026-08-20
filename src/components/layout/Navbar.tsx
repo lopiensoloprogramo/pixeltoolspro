@@ -67,15 +67,17 @@ export default function Navbar() {
         Comprimir
         </Link>
 
-        <Link to="/redimensionar-imagen" className={ location.pathname === "/redimensionar-imagenes"
+        <Link to="/redimensionar-imagen" className={ location.pathname === "/redimensionar-imagen"
             ? "active"
             : ""}>
         Redimensionar para redes
         </Link>
 
-        <a href="#">
-          Blog
-        </a>
+        <Link to="/foto-formal" className={ location.pathname === "/foto-formal"
+            ? "active"
+            : ""}>
+        Generador Foto Formal
+        </Link>
 
         <a href="#">
           API
