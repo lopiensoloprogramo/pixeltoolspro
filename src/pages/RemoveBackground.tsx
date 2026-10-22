@@ -52,20 +52,11 @@ export default function RemoveBackground() {
 
 
     try {
+const blob = await removeBackground(file);
 
-      const output =
-        await removeBackground(file);
+const resultUrl = URL.createObjectURL(blob);
 
-
-      const blob =
-        await output.toBlob();
-
-
-      const resultUrl =
-        URL.createObjectURL(blob);
-
-
-      setResult(resultUrl);
+setResult(resultUrl);
 
     } catch (err) {
 
