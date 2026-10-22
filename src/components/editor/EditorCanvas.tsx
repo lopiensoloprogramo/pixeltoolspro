@@ -18,7 +18,7 @@ PROPS
 interface Props {
   image: string;
   result: string;
-  mode: "erase" | "restore" | null;
+  mode: "erase" | "restore" | "pan" | null;
   brushSize: number;
   zoom: number;
   
@@ -110,7 +110,22 @@ const EditorCanvas = forwardRef<
 
   const [isDrawing, setIsDrawing] =
     useState(false);
+const [isPanning, setIsPanning] = useState(false);
 
+const [pan, setPan] = useState({
+  x: 0,
+  y: 0,
+});
+
+const panStartRef = useRef({
+  x: 0,
+  y: 0,
+});
+
+const panOriginRef = useRef({
+  x: 0,
+  y: 0,
+});
 
   /*
   ========================================
@@ -233,9 +248,12 @@ const EditorCanvas = forwardRef<
       ----------------------------------------
       */
 
-      historyRef.current = [];
+    historyRef.current = [];
+    redoHistoryRef.current = [];
 
-      redoHistoryRef.current = [];
+    setPan({ x: 0, y: 0 });
+    setIsPanning(false);
+    setIsDrawing(false);
 
     };
 
@@ -248,58 +266,25 @@ const EditorCanvas = forwardRef<
   ========================================
   */
 
-  function getPosition(
-    event:
-      React.PointerEvent<HTMLCanvasElement>
-  ) {
+function getPosition(
+  event: React.PointerEvent<HTMLCanvasElement>
+) {
+  const canvas = canvasRef.current;
 
-    const canvas =
-      canvasRef.current;
+  if (!canvas) return null;
 
-    if (!canvas)
-      return null;
+  const rect = canvas.getBoundingClientRect();
 
+  return {
+    x:
+      (event.clientX - rect.left) *
+      (canvas.width / rect.width),
 
-    const rect =
-      canvas.getBoundingClientRect();
-
-
-    /*
-    ----------------------------------------
-    ESCALA REAL
-
-    Esto permite que el pincel siga
-    correctamente al cursor incluso
-    cuando hacemos zoom.
-    ----------------------------------------
-    */
-
-    const scaleX =
-      canvas.width /
-      rect.width;
-
-
-    const scaleY =
-      canvas.height /
-      rect.height;
-
-
-    return {
-
-      x:
-        (event.clientX -
-          rect.left) *
-        scaleX,
-
-      y:
-        (event.clientY -
-          rect.top) *
-        scaleY,
-
-    };
-
-  }
-
+    y:
+      (event.clientY - rect.top) *
+      (canvas.height / rect.height),
+  };
+}
 
   /*
   ========================================
@@ -596,72 +581,54 @@ const EditorCanvas = forwardRef<
   ========================================
   */
 
-  function startDrawing(
-    event:
-      React.PointerEvent<HTMLCanvasElement>
-  ) {
+ function startDrawing(
+  event: React.PointerEvent<HTMLCanvasElement>
+) {
 
-    /*
-    ----------------------------------------
-    SI NO HAY HERRAMIENTA
-    NO HACER NADA
-    ----------------------------------------
-    */
+  // ========================================
+  // MODO MOVER
+  // ========================================
 
-    if (mode === null) {
-
-      return;
-
-    }
-
-
-    /*
-    ----------------------------------------
-    GUARDAR ESTADO ANTES
-    DE MODIFICAR EL CANVAS
-    ----------------------------------------
-    */
-
-    saveCurrentState();
-
-
-    /*
-    ----------------------------------------
-    CAPTURAR PUNTERO
-    ----------------------------------------
-    */
+  if (mode === "pan") {
 
     event.currentTarget.setPointerCapture(
-
       event.pointerId
-
     );
 
+    panStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+    };
 
-    /*
-    ----------------------------------------
-    ACTIVAR DIBUJO
-    ----------------------------------------
-    */
+    panOriginRef.current = {
+      x: pan.x,
+      y: pan.y,
+    };
 
-    setIsDrawing(true);
+    setIsPanning(true);
 
-
-    /*
-    ----------------------------------------
-    PINTAR PRIMER PUNTO
-    ----------------------------------------
-    */
-
-    paint(
-
-      event,
-
-      true
-
-    );
-
+    return;
   }
+
+
+  // ========================================
+  // MODO EDICIÓN
+  // ========================================
+
+  if (mode === null) {
+    return;
+  }
+
+  saveCurrentState();
+
+  event.currentTarget.setPointerCapture(
+    event.pointerId
+  );
+
+  setIsDrawing(true);
+
+  paint(event, true);
+}
 
 
   /*
@@ -669,36 +636,46 @@ const EditorCanvas = forwardRef<
   TERMINAR DIBUJO
   ========================================
   */
+function moveCanvas(
+  event: React.PointerEvent<HTMLCanvasElement>
+) {
+
+  if (!isPanning) {
+    return;
+  }
+
+  const deltaX =
+    event.clientX -
+    panStartRef.current.x;
+
+  const deltaY =
+    event.clientY -
+    panStartRef.current.y;
+
+  setPan({
+    x: panOriginRef.current.x + deltaX,
+    y: panOriginRef.current.y + deltaY,
+  });
+}
 
   function stopDrawing(
-    event:
-      React.PointerEvent<HTMLCanvasElement>
+  event: React.PointerEvent<HTMLCanvasElement>
+) {
+
+  setIsDrawing(false);
+  setIsPanning(false);
+
+  if (
+    event.currentTarget.hasPointerCapture(
+      event.pointerId
+    )
   ) {
 
-    setIsDrawing(false);
-
-
-    /*
-    ----------------------------------------
-    LIBERAR CAPTURA DEL PUNTERO
-    ----------------------------------------
-    */
-
-    if (
-      event.currentTarget.hasPointerCapture(
-        event.pointerId
-      )
-    ) {
-
-      event.currentTarget.releasePointerCapture(
-
-        event.pointerId
-
-      );
-
-    }
-
+    event.currentTarget.releasePointerCapture(
+      event.pointerId
+    );
   }
+}
 
 
   /*
@@ -1114,40 +1091,40 @@ async function exportImage(): Promise<string> {
       className="editor-canvas-container"
     >
 
-      <canvas
+<canvas
+  ref={canvasRef}
 
-        ref={canvasRef}
+  className={`editor-canvas ${
+    mode === "pan"
+      ? "pan-mode"
+      : ""
+  }`}
 
-        className="editor-canvas"
+  style={{
+    transform:
+      `translate(${pan.x}px, ${pan.y}px) scale(${zoom / 100})`,
+  }}
 
-        style={{
-          transform:
-            `scale(${zoom / 100})`,
-        }}
+  onPointerDown={
+    startDrawing
+  }
 
-        onPointerDown={
-          startDrawing
-        }
+  onPointerMove={
+    mode === "pan"
+      ? moveCanvas
+      : isDrawing
+        ? paint
+        : undefined
+  }
 
-        onPointerMove={
+  onPointerUp={
+    stopDrawing
+  }
 
-          isDrawing
-
-            ? paint
-
-            : undefined
-
-        }
-
-        onPointerUp={
-          stopDrawing
-        }
-
-        onPointerCancel={
-          stopDrawing
-        }
-
-      />
+  onPointerCancel={
+    stopDrawing
+  }
+/>
 
     </div>
 

@@ -1,12 +1,12 @@
 import "./EditorToolbar.css";
 
 interface Props {
-  mode: "erase" | "restore" | null;
+  mode: "erase" | "restore" | "pan" | null;
   zoom: number;
 
   onErase: () => void;
   onRestore: () => void;
-
+  onPan: () => void;
   onUndo: () => void;
   onRedo: () => void;
 
@@ -26,7 +26,7 @@ export default function EditorToolbar({
 
   onErase,
   onRestore,
-
+  onPan,
   onUndo,
   onRedo,
 
@@ -88,6 +88,26 @@ export default function EditorToolbar({
       ======================================== */}
 
       <div className="toolbar-group">
+
+        <button
+          type="button"
+          className={
+            `toolbar-button ${
+              mode === "pan"
+                ? "active"
+                : ""
+            }`
+          }
+          onClick={onPan}
+          title="Mover imagen"
+        >
+          ✋
+          <span>
+            Mover
+          </span>
+        </button>
+
+
 
         <button
           type="button"

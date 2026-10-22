@@ -24,8 +24,13 @@ export default function EditorWorkspace({
   onContinue,
 }: Props) {
 
-  const [mode, setMode] =
-    useState<"erase" | "restore" | null>(null);
+const [mode, setMode] =
+  useState<
+    "erase" |
+    "restore" |
+    "pan" |
+    null
+  >(null);
 
   const [brushSize, setBrushSize] =
     useState(30);
@@ -66,6 +71,7 @@ export default function EditorWorkspace({
 
         onErase={() => setMode("erase")}
         onRestore={() => setMode("restore")}
+        onPan={() => setMode("pan")}
 
         onUndo={() => editorCanvasRef.current?.undo()}
         onRedo={() => editorCanvasRef.current?.redo()}

@@ -224,3 +224,15 @@
   }
 
 }
+
+.editor-canvas {
+  transform-origin: center center;
+}
+
+.editor-canvas.pan-mode {
+  cursor: grab;
+}
+
+.editor-canvas.pan-mode:active {
+  cursor: grabbing;
+}
